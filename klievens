@@ -1,0 +1,37 @@
+def aprekinat_linoleja_izmaksas(cena_par_kvadratmetru, rulla_platums, telpas_platums, telpas_garums):
+  laukums = telpas_platums * telpas_garums
+  kopigas_izmaksas = cena_par_kvadratmetru * laukums
+  return kopigas_izmaksas
+
+def get_valid_input(prompt):
+  """
+  Get valid numeric input from the user.
+
+  :param prompt: Prompt message for the user
+  :return: Valid numeric input (float)
+  """
+  while True:
+      user_input = input(prompt)
+      try:
+          # Replace comma with dot to handle both formats
+          user_input = user_input.replace(",", ".")
+          user_input = float(user_input)
+
+          if user_input >= 0:
+              return user_input
+          else:
+              print("Ievadiet pozitīvu skaitli.")
+
+      except ValueError:
+          print("Ievadiet skaitli.")
+
+cena_par_kvadratmetru = get_valid_input("Ievadiet linoleja cenu par kvadrātmetru (EUR/m²): ")
+rulla_platums = get_valid_input("Ievadiet linoleja ruļļa platumu (m): ")
+telpas_platums = get_valid_input("Ievadiet telpas platumu (m): ")
+telpas_garums = get_valid_input("Ievadiet telpas garumu (m): ")
+
+if isinstance(cena_par_kvadratmetru, str) or isinstance(rulla_platums, str) or isinstance(telpas_platums, str) or isinstance(telpas_garums, str):
+  print("Tu neievadīji skaitli.")
+else:
+  kopigas_izmaksas = aprekinat_linoleja_izmaksas(cena_par_kvadratmetru, rulla_platums, telpas_platums, telpas_garums)
+  print(f"Linoleja kopējās izmaksas telpā ir {kopigas_izmaksas:.2f} EUR.")
